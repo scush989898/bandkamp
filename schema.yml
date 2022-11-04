@@ -1,0 +1,373 @@
+openapi: 3.0.3
+info:
+  title: BandKamp
+  version: 1.0.1
+  description: "project simulating a music application that can \n               \
+    \     do CRUD operations between musicians, albums and songs."
+paths:
+  /api/musicians/:
+    get:
+      operationId: api_musicians_list
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Musician'
+          description: ''
+    post:
+      operationId: api_musicians_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Musician'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Musician'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Musician'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Musician'
+          description: ''
+  /api/musicians/{musician_id}/:
+    get:
+      operationId: api_musicians_retrieve
+      parameters:
+      - in: path
+        name: musician_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Musician'
+          description: ''
+    put:
+      operationId: api_musicians_update
+      parameters:
+      - in: path
+        name: musician_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Musician'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Musician'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Musician'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Musician'
+          description: ''
+    patch:
+      operationId: api_musicians_partial_update
+      parameters:
+      - in: path
+        name: musician_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedMusician'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedMusician'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedMusician'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Musician'
+          description: ''
+    delete:
+      operationId: api_musicians_destroy
+      parameters:
+      - in: path
+        name: musician_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/musicians/{musician_id}/albums/:
+    get:
+      operationId: api_musicians_albums_list
+      parameters:
+      - in: path
+        name: musician_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Album'
+          description: ''
+    post:
+      operationId: api_musicians_albums_create
+      parameters:
+      - in: path
+        name: musician_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Album'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Album'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Album'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Album'
+          description: ''
+  /api/musicians/{musician_id}/albums/{album_id}/songs/:
+    get:
+      operationId: api_musicians_albums_songs_list
+      parameters:
+      - in: path
+        name: album_id
+        schema:
+          type: integer
+        required: true
+      - in: path
+        name: musician_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Song'
+          description: ''
+    post:
+      operationId: api_musicians_albums_songs_create
+      parameters:
+      - in: path
+        name: album_id
+        schema:
+          type: integer
+        required: true
+      - in: path
+        name: musician_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Song'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Song'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Song'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Song'
+          description: ''
+components:
+  schemas:
+    Album:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        musician_id:
+          type: integer
+          readOnly: true
+      required:
+      - id
+      - musician_id
+      - name
+    Musician:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        first_name:
+          type: string
+          maxLength: 255
+        last_name:
+          type: string
+          maxLength: 255
+        instrument:
+          type: string
+          maxLength: 255
+        albums:
+          type: array
+          items:
+            type: integer
+          readOnly: true
+      required:
+      - albums
+      - first_name
+      - id
+      - instrument
+      - last_name
+    PatchedMusician:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        first_name:
+          type: string
+          maxLength: 255
+        last_name:
+          type: string
+          maxLength: 255
+        instrument:
+          type: string
+          maxLength: 255
+        albums:
+          type: array
+          items:
+            type: integer
+          readOnly: true
+    Song:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        duration:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        album_id:
+          type: integer
+          readOnly: true
+      required:
+      - album_id
+      - duration
+      - id
+      - name
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
