@@ -22,7 +22,6 @@ Projeto de cadastro, visualização, atualização e deleção de: músicos, alb
 
 
 # Instruções:
- 
 
 ### Crie o ambiente virtual
 ```
